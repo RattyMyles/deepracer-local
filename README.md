@@ -1,7 +1,12 @@
+## prerequestites
+you need docker or nvidia-docker(gpu version)
+
 1) git clone https://github.com/RattyMyles/deepracer-local.git
-2) apt-get install tigervnc-viewer gnome-terminal
+2) apt-get install tigervnc-viewer gnome-terminal 
 3) cd deepracer-local
 4) ./start-training
+
+
 
 
 # DeepRacer local training (2020 version)
