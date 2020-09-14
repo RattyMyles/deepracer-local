@@ -1,3 +1,9 @@
+1) git clone https://github.com/RattyMyles/deepracer-local.git
+2) apt-get install tigervnc-viewer gnome-terminal
+3) cd deepracer-local
+4) ./start-training
+
+
 # DeepRacer local training (2020 version)
 
 Heavily based off work by [Crr0004](https://github.com/crr0004), [AlexSchultz](https://github.com/alexschultz), [Richardfan1126](https://github.com/richardfan1126) and [LarsLL](https://github.com/larsll)
