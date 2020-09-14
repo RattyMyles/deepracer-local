@@ -2,10 +2,11 @@
 you need docker or nvidia-docker(gpu version)
 This is for computers for non GPU version:
 
-1) git clone https://github.com/RattyMyles/deepracer-local.git
-2) apt-get install tigervnc-viewer gnome-terminal 
-3) cd deepracer-local
-4) ./start-training
+- git clone https://github.com/RattyMyles/deepracer-local.git
+- apt-get install tigervnc-viewer gnome-terminal (not needed if on Manjaro)
+- docker network create sagemaker-local
+- cd deepracer-local
+- ./start-training
 
 ##Optional after step 4
 Look at the instructions so you can back up your pre-trained models.
