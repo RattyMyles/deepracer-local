@@ -27,13 +27,21 @@ if [ "$ENABLE_LOCAL_DESKTOP" = true ] ; then
     SAGEMAKER_ID="$(docker ps | awk ' /sagemaker/ { print $1 }')"
 
     echo 'Attempting to open stream viewer and logs...'
-    gnome-terminal --tab -- sh -c "echo viewer;x-www-browser -new-window http://localhost:8888/stream_viewer?topic=/racecar/deepracer/kvs_stream;sleep 1;wmctrl -r kvs_stream -b remove,maximized_vert,maximized_horz;sleep 1;wmctrl -r kvs_stream -e 1,100,100,720,640"
-    gnome-terminal --tab -- sh -c "docker logs -f $SAGEMAKER_ID"
-    gnome-terminal --tab -- sh -c 'docker logs -f robomaker'
+
+	if [ -f "/etc/arch-release" ]; then
+		#We are Manjaro!
+		exo-open --launch WebBrowser http://localhost:8888/stream_viewer?topic=/racecar/deepracer/kvs_stream
+		exo-open --launch TerminalEmulator  sh -c "docker logs -f $SAGEMAKER_ID"
+		exo-open --launch TerminalEmulator  sh -c 'docker logs -f robomaker'
+		vncviewer localhost:8080 &
+	else
+		gnome-terminal --tab -- sh -c "echo viewer;x-www-browser -new-window http://localhost:8888/stream_viewer?topic=/racecar/deepracer/kvs_stream;sleep 1;wmctrl -r kvs_stream -b remove,maximized_vert,maximized_horz;sleep 1;wmctrl -r kvs_stream -e 1,100,100,720,640"
+		gnome-terminal --tab -- sh -c "docker logs -f $SAGEMAKER_ID"
+		gnome-terminal --tab -- sh -c 'docker logs -f robomaker'
+	fi
 else
     echo "Started in headless server mode. Set ENABLE_LOCAL_DESKTOP to true in config.env for desktop mode."
     if [ "$ENABLE_TMUX" = true ] ; then
         ./tmux-logs.sh
     fi
 fi
-
