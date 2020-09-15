@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+nvidia-docker | grep "nvidia-docker: command not found" &> /dev/null
+if [ $? == 1 ]; then
+    echo "nvidia-docker is not installed"
+    echo "GPU Disabled"
+    sed -i 's/^\(GPU_AVAILABLE\s*=\s*\).*$/GPU_AVAILABLE=False/' config.env
+    sed -i 's/^\(ENABLE_GPU_TRAINING\s*=\s*\).*$/GPU_AVAILABLE=False/' config.env
+    sed -i 's/^\(ENABLE_GPU_TRAINING:\s* \s*\).*$/ENABLE_GPU_TRAINING: "False"/' data/minio/bucket/custom_files/training_params.yaml
+else
+    echo "GPU Enabled"
+    sed -i 's/^\(GPU_AVAILABLE\s*=\s*\).*$/GPU_AVAILABLE=True/' config.env
+    sed -i 's/^\(ENABLE_GPU_TRAINING\s*=\s*\).*$/GPU_AVAILABLE=True/' config.env
+    sed -i 's/^\(ENABLE_GPU_TRAINING:\s* \s*\).*$/ENABLE_GPU_TRAINING: "True"/' data/minio/bucket/custom_files/training_params.yaml
+fi
+
 source config.env
 
 if [ -e data/minio/bucket/current/model/deepracer_checkpoints.json ] ; then
