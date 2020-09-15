@@ -3,14 +3,14 @@
 if hash nvidia-docker 2>/dev/null; then
     echo "GPU Enabled"
     sed -i 's/^\(GPU_AVAILABLE\s*=\s*\).*$/GPU_AVAILABLE=True/' config.env
-    sed -i 's/^\(ENABLE_GPU_TRAINING\s*=\s*\).*$/GPU_AVAILABLE=True/' config.env
+    sed -i 's/^\(ENABLE_GPU_TRAINING\s*=\s*\).*$/ENABLE_GPU_TRAINING=True/' config.env
     sed -i 's/^\(ENABLE_GPU_TRAINING:\s* \s*\).*$/ENABLE_GPU_TRAINING: "True"/' data/minio/bucket/custom_files/training_params.yaml
     #sed -i 's/\(image: awsdeepracercommunity\/deepracer-robomaker\s*:\s*\).*$/image: awsdeepracercommunity\/deepracer-robomaker:gpu/' docker-compose.yml
 else
     echo "nvidia-docker is not installed"
     echo "GPU Disabled"
     sed -i 's/^\(GPU_AVAILABLE\s*=\s*\).*$/GPU_AVAILABLE=False/' config.env
-    sed -i 's/^\(ENABLE_GPU_TRAINING\s*=\s*\).*$/GPU_AVAILABLE=False/' config.env
+    sed -i 's/^\(ENABLE_GPU_TRAINING\s*=\s*\).*$/ENABLE_GPU_TRAINING=False/' config.env
     sed -i 's/^\(ENABLE_GPU_TRAINING:\s* \s*\).*$/ENABLE_GPU_TRAINING: "False"/' data/minio/bucket/custom_files/training_params.yaml
     #sed -i 's/\(image: awsdeepracercommunity\/deepracer-robomaker\s*:\s*\).*$/image: awsdeepracercommunity\/deepracer-robomaker:cpu-avx2/' docker-compose.yml   
 fi
