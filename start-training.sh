@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-nvidia-docker | grep "nvidia-docker: command not found" &> /dev/null
+nvidia-docker --help| grep "nvidia-docker: command not found" &> /dev/null
 if [ $? == 1 ]; then
     echo "nvidia-docker is not installed"
     echo "GPU Disabled"
