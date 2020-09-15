@@ -1,17 +1,16 @@
 #!/usr/bin/env bash
 
-nvidia-docker --help| grep "nvidia-docker: command not found" &> /dev/null
-if [ $? == 1 ]; then
+if hash nvidia-docker 2>/dev/null; then
+    echo "GPU Enabled"
+    sed -i 's/^\(GPU_AVAILABLE\s*=\s*\).*$/GPU_AVAILABLE=True/' config.env
+    sed -i 's/^\(ENABLE_GPU_TRAINING\s*=\s*\).*$/GPU_AVAILABLE=True/' config.env
+    sed -i 's/^\(ENABLE_GPU_TRAINING:\s* \s*\).*$/ENABLE_GPU_TRAINING: "True"/' data/minio/bucket/custom_files/training_params.yaml
+else
     echo "nvidia-docker is not installed"
     echo "GPU Disabled"
     sed -i 's/^\(GPU_AVAILABLE\s*=\s*\).*$/GPU_AVAILABLE=False/' config.env
     sed -i 's/^\(ENABLE_GPU_TRAINING\s*=\s*\).*$/GPU_AVAILABLE=False/' config.env
     sed -i 's/^\(ENABLE_GPU_TRAINING:\s* \s*\).*$/ENABLE_GPU_TRAINING: "False"/' data/minio/bucket/custom_files/training_params.yaml
-else
-    echo "GPU Enabled"
-    sed -i 's/^\(GPU_AVAILABLE\s*=\s*\).*$/GPU_AVAILABLE=True/' config.env
-    sed -i 's/^\(ENABLE_GPU_TRAINING\s*=\s*\).*$/GPU_AVAILABLE=True/' config.env
-    sed -i 's/^\(ENABLE_GPU_TRAINING:\s* \s*\).*$/ENABLE_GPU_TRAINING: "True"/' data/minio/bucket/custom_files/training_params.yaml
 fi
 
 source config.env
