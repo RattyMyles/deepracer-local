@@ -15,9 +15,13 @@ fi
 docker-compose -f ./docker-compose.yml down
 
 if [ "$ENABLE_LOCAL_DESKTOP" = true ] ; then
+	if [ -f "/etc/arch-release" ]; then
+    echo "Please Close the Windows Manually"
+  else
     if [ -n  "$(which wmctrl)" ] ; then
       wmctrl -c kvs_stream
     fi
+  fi
 fi
 
 if [ "$ENABLE_TMUX" = true ] ; then
