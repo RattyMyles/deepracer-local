@@ -1,5 +1,25 @@
 #!/usr/bin/env bash
 
+echo "List of supported worlds \
+AWS_track                   bot_car \
+Albert                      box_obstacle \
+AmericasGeneratedInclStart  camera \
+Bowtie_track                reInvent 2019_track \
+Canada_Training             reInvent2019_wide \
+China_track                 reInvent2019_wide_mirrored \
+FS_June2020                 reinvent_base \ 
+July_2020                   reinvent_carpet \
+LGSWide                     reinvent_carpet_carpet \
+Mexico_track                reinvent_concrete \
+New_York_Track              reinvent_concrete_concrete \
+Oval_track                  reinvent_grass_asphalt \
+Spain_track                 reinvent_lines_walls \
+Straight_track              reinvent_wood \
+Tokyo_Training_track        reinvent_wood_wood \
+Vegas_track                 top_camera \
+Virtual_May19_Train_track"
+
+
 if hash nvidia-docker 2>/dev/null; then
     echo "GPU Enabled"
     sed -i 's/^\(GPU_AVAILABLE\s*=\s*\).*$/GPU_AVAILABLE=True/' config.env
