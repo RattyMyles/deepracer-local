@@ -24,8 +24,9 @@
 #
 #"
 
-WORLD_NAME=reinvent_base
+#WORLD_NAME=reinvent_base
 #WORLD_NAME=AWS_track
+WORLD_NAME=reInvent2019_wide
 
 sed -i "s/^\(WORLD_NAME\s*=\s*\).*$/WORLD_NAME=$WORLD_NAME/" config.env
 sed -i "s/^\(WORLD_NAME:\s* \s*\).*$/WORLD_NAME: \"$WORLD_NAME\"/" data/minio/bucket/custom_files/training_params.yaml
