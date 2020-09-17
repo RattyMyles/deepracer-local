@@ -15,7 +15,7 @@ fi
 docker-compose -f ./docker-compose.yml down
 
 if [ "$ENABLE_LOCAL_DESKTOP" = true ] ; then
-	if [ -f "/etc/arch-release" ]; then
+  if [ -f "/etc/arch-release" ]; then
     echo "Please Close the Windows Manually"
   else
     if [ -n  "$(which wmctrl)" ] ; then
