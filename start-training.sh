@@ -19,8 +19,15 @@ Spain_track                 reinvent_lines_walls
 Straight_track              reinvent_wood
 Tokyo_Training_track        reinvent_wood_wood
 Vegas_track                 top_camera
-Virtual_May19_Train_track"
+Virtual_May19_Train_track
 
+"
+
+WORLD_NAME=reinvent_base
+WORLD_NAME=AWS_track
+
+sed -i 's/^\(WORLD_NAME\s*=\s*\).*$/WORLD_NAME=$WORLD_NAME/' config.env
+sed -i 's/^\(WORLD_NAME:\s* \s*\).*$/WORLD_NAME: "$WORLD_NAME"/' data/minio/bucket/custom_files/training_params.yaml
 
 if hash nvidia-docker 2>/dev/null; then
     echo "GPU Enabled"
